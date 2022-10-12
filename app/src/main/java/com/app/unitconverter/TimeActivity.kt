@@ -45,9 +45,11 @@ class TimeActivity : ComponentActivity() {
 
 @Composable
 fun textFields2() {
+
+    val mContext = LocalContext.current
     androidx.compose.material.Surface(modifier = Modifier.fillMaxSize()) {
         var n1 = remember {
-            mutableStateOf("0")
+            mutableStateOf("")
 
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,21 +63,43 @@ fun textFields2() {
                     n1.value = newVal
                 },colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = colorResource(R.color.buttonbg)
-                ),
+                ), shape = RoundedCornerShape(20.dp)
+                , placeholder = {
+                    Text(text = "Enter the value here")
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
+            var result by remember {
+                mutableStateOf("")
+            }
             Column(
                 modifier=Modifier.padding(45.dp,0.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {if(!n1.value.isEmpty()){
+                        var mResult = Integer.parseInt(n1.value)*60
+                        result = "${n1.value} hours = ${mResult.toString()} minutes"
+                    }
+                    else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    }
+                                             }
+                        ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "Hrs to mins",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = { if(!n1.value.isEmpty()){
+                        var mResult = Integer.parseInt(n1.value)*0.0167
+                        result = "${n1.value} minutes = ${mResult.toString()} hours"
+                    }
+                        else{
+                            Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    }
+                                             },
+                        shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -84,14 +108,30 @@ fun textFields2() {
                     }
                 }
                 Row() {
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        if(!n1.value.isEmpty()){
+                        var mResult = Integer.parseInt(n1.value)*60
+                        result = "${n1.value} minutes = ${mResult.toString()} seconds"
+                                             }
+                        else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    }}
+                        ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "mins to secs",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {if(!n1.value.isEmpty()){
+                        var mResult = Integer.parseInt(n1.value)*0.0167
+                        result = "${n1.value} seconds = ${mResult.toString()} minutes"
+                            }
+                        else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                        }
+                                             }
+                        ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -105,7 +145,7 @@ fun textFields2() {
                         .background(colorResource(R.color.buttonbg))
                         .padding(35.dp),
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "Output", color = colorResource(R.color.black))
+                        Text(text = result, color = colorResource(R.color.black))
                     }
                 }
 

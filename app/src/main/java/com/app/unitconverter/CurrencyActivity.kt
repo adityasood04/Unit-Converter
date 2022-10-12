@@ -48,7 +48,8 @@ class CurrencyActivity : ComponentActivity() {
 
 @Composable
 fun textFields() {
-    androidx.compose.material.Surface(modifier = Modifier.fillMaxSize()) {
+    val mContext = LocalContext.current
+    Surface(modifier = Modifier.fillMaxSize()) {
         var n1 = remember {
             mutableStateOf("")
 
@@ -81,10 +82,12 @@ fun textFields() {
                 modifier=Modifier.padding(45.dp,0.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
-                    OutlinedButton(onClick = {
+                    OutlinedButton(onClick = {if(!n1.value.isEmpty()){
                         var mresult = Integer.parseInt(n1.value)*0.012
                         result = "${n1.value} INR = ${mresult.toString()} USD"
-                                             }
+                                             } else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    }}
 
                         ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
@@ -93,10 +96,14 @@ fun textFields() {
                             .padding(10.dp)) {
                         Text(text = "INR to USD",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = {
+                    OutlinedButton(onClick = {if(!n1.value.isEmpty()){
                         var mresult = Integer.parseInt(n1.value)*82
                         result = "${n1.value} USD = ${mresult.toString()} INR"
-                    } ,shape = RoundedCornerShape(15.dp),
+                    }else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    }
+                                             },
+                        shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -105,21 +112,28 @@ fun textFields() {
                     }
                 }
                 Row() {
-                    OutlinedButton(onClick = {
+                    OutlinedButton(onClick = {if(!n1.value.isEmpty()){
                         var mresult = Integer.parseInt(n1.value)*0.013
                         result = "${n1.value} INR = ${mresult.toString()} EURO"
+                    }else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
                     }
-                        ,shape = RoundedCornerShape(15.dp),
+                                             },
+                        shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "INR to EURO",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = {
+                    OutlinedButton(onClick = {if(!n1.value.isEmpty()){
                         var mresult = Integer.parseInt(n1.value)*80
                         result = "${n1.value} EURO = ${mresult.toString()} INR"
-                    },shape = RoundedCornerShape(15.dp),
+                    }
+                    else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    }},
+                        shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
