@@ -6,8 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -18,11 +21,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.unitconverter.ui.theme.UnitConverterTheme
+import java.util.logging.Logger.global
 
 class CurrencyActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +50,10 @@ class CurrencyActivity : ComponentActivity() {
 fun textFields() {
     androidx.compose.material.Surface(modifier = Modifier.fillMaxSize()) {
         var n1 = remember {
-            mutableStateOf("0")
+            mutableStateOf("")
 
         }
+
 
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -58,22 +64,39 @@ fun textFields() {
                 value = n1.value,
                 onValueChange = { newVal->
                     n1.value = newVal
-                },colors = TextFieldDefaults.textFieldColors(
+                }
+                , shape = RoundedCornerShape(20.dp)
+                , placeholder = {
+                           Text(text = "Enter the value here")
+                }, colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = colorResource(R.color.buttonbg)
-                )
+                ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
+            var result by remember {
+                mutableStateOf("")
+            }
+
             Column(
                 modifier=Modifier.padding(45.dp,0.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        var mresult = Integer.parseInt(n1.value)*0.012
+                        result = "${n1.value} INR = ${mresult.toString()} USD"
+                                             }
+
+                        ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "INR to USD",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        var mresult = Integer.parseInt(n1.value)*82
+                        result = "${n1.value} USD = ${mresult.toString()} INR"
+                    } ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -82,14 +105,21 @@ fun textFields() {
                     }
                 }
                 Row() {
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        var mresult = Integer.parseInt(n1.value)*0.013
+                        result = "${n1.value} INR = ${mresult.toString()} EURO"
+                    }
+                        ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "INR to EURO",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        var mresult = Integer.parseInt(n1.value)*80
+                        result = "${n1.value} EURO = ${mresult.toString()} INR"
+                    },shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -97,11 +127,22 @@ fun textFields() {
                         Text(text = "EURO to INR",color = colorResource(id = R.color.black))
                     }
                 }
+                Box(modifier = Modifier.padding(12.dp)){
+                    Column(modifier = Modifier
+                        .fillMaxWidth()
+                        .background(colorResource(R.color.buttonbg))
+                        .padding(35.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = result, color = colorResource(R.color.black))
+                    }
+                }
+
             }
 
 
 
         }
+
 
 
     }
@@ -137,6 +178,7 @@ fun currencyActivity(){
 
 
 }
+
 
 
 @Preview(showBackground = true)

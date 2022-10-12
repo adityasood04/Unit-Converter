@@ -8,6 +8,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -18,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -59,7 +61,8 @@ fun textField() {
                     n1.value = newVal
                 },colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = colorResource(R.color.buttonbg)
-                )
+                ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
             Column(
                 modifier=Modifier.padding(45.dp,0.dp)
@@ -96,10 +99,17 @@ fun textField() {
                         Text(text = "cm to m",color = colorResource(id = R.color.black))
                     }
                 }
+                Box(modifier = Modifier.padding(12.dp)){
+                    Column(modifier = Modifier
+                        .fillMaxWidth()
+                        .background(colorResource(R.color.buttonbg))
+                        .padding(35.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = "Output", color = colorResource(R.color.black))
+                    }
+                }
+
             }
-
-
-
         }
 
 
