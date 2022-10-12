@@ -10,12 +10,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
@@ -45,9 +42,10 @@ class DistanceActivity : ComponentActivity() {
 
 @Composable
 fun textField() {
+    var mContext = LocalContext.current
     androidx.compose.material.Surface(modifier = Modifier.fillMaxSize()) {
         var n1 = remember {
-            mutableStateOf("0")
+            mutableStateOf("")
 
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,21 +59,38 @@ fun textField() {
                     n1.value = newVal
                 },colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = colorResource(R.color.buttonbg)
-                ),
+                ),shape = RoundedCornerShape(20.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
+            var result by remember {
+                mutableStateOf("")
+            }
             Column(
                 modifier=Modifier.padding(45.dp,0.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        if(!n1.value.isEmpty()){
+                        var mResult = Integer.parseInt(n1.value)*1000
+                        result = "${n1.value} Km = ${mResult.toString()} m"
+                    }
+                    else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    } },shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "Km to m",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        if(!n1.value.isEmpty()){
+                        var mResult = Integer.parseInt(n1.value)*0.001
+                        result = "${n1.value} m = ${mResult.toString()} Km"
+                    }
+                    else{
+                        Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                    } },shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -84,14 +99,30 @@ fun textField() {
                     }
                 }
                 Row() {
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        if(!n1.value.isEmpty()){
+                            var mResult = Integer.parseInt(n1.value)*100
+                            result = "${n1.value} m = ${mResult.toString()} cm"
+                        }
+                        else{
+                            Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                        }
+                                             },shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
                             .padding(10.dp)) {
                         Text(text = "m to cm",color = colorResource(id = R.color.black))
                     }
-                    OutlinedButton(onClick = { /*TODO*/ },shape = RoundedCornerShape(15.dp),
+                    OutlinedButton(onClick = {
+                        if(!n1.value.isEmpty()){
+                            var mResult = Integer.parseInt(n1.value)*0.01
+                            result = "${n1.value} cm = ${mResult.toString()} m"
+                        }
+                        else{
+                            Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
+                        }
+                                             },shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier
                             .weight(1f)
@@ -105,7 +136,7 @@ fun textField() {
                         .background(colorResource(R.color.buttonbg))
                         .padding(35.dp),
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "Output", color = colorResource(R.color.black))
+                        Text(text = result, color = colorResource(R.color.black))
                     }
                 }
 

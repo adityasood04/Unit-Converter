@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -173,7 +175,7 @@ fun timeActivity(){
             .fillMaxWidth()
 
         ) {
-            Column(Modifier.background(colorResource(R.color.upperStrip))) {
+            Column(Modifier.background(colorResource(R.color.upperStrip)), horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = "Time Converter", textAlign = TextAlign.Center, color = colorResource(id = R.color.white),
                     fontFamily = FontFamily.Monospace,
                     fontSize = 20.sp, modifier = Modifier
@@ -181,6 +183,9 @@ fun timeActivity(){
                         .fillMaxWidth()
 
                 )
+                Image(painter = painterResource(R.drawable.timewhite)
+                    , contentDescription =null , modifier = Modifier.height(200.dp).width(200.dp).padding(0.dp,10.dp,0.dp,0.dp))
+
             }
 
         }
