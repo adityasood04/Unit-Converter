@@ -131,8 +131,7 @@ fun textFields2() {
                             }
                         else{
                         Toast.makeText(mContext,"Enter some value first",Toast.LENGTH_SHORT).show()
-                        }
-                                             }
+                        } }
                         ,shape = RoundedCornerShape(15.dp),
                         border = BorderStroke(2.dp, colorResource(R.color.buttonStroke)),
                         modifier = Modifier

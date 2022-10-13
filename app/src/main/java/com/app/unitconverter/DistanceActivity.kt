@@ -46,7 +46,7 @@ class DistanceActivity : ComponentActivity() {
 @Composable
 fun textField() {
     var mContext = LocalContext.current
-    androidx.compose.material.Surface(modifier = Modifier.fillMaxSize()) {
+    Surface(modifier = Modifier.fillMaxSize()) {
         var n1 = remember {
             mutableStateOf("")
 
