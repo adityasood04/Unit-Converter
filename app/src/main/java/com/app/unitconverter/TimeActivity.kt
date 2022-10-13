@@ -75,7 +75,7 @@ fun textFields2() {
                 mutableStateOf("")
             }
             Column(
-                modifier=Modifier.padding(45.dp,0.dp)
+                modifier=Modifier.padding(45.dp,0.dp,45.dp,150.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
                     OutlinedButton(onClick = {if(!n1.value.isEmpty()){
@@ -150,18 +150,8 @@ fun textFields2() {
                         Text(text = result, color = colorResource(R.color.black))
                     }
                 }
-
             }
-
-
-
-
-
         }
-
-
-
-
     }
 }
 @Composable
@@ -184,13 +174,10 @@ fun timeActivity(){
 
                 )
                 Image(painter = painterResource(R.drawable.timewhite)
-                    , contentDescription =null , modifier = Modifier.height(200.dp).width(200.dp).padding(0.dp,10.dp,0.dp,0.dp))
-
+                    , contentDescription =null , modifier = Modifier.size(200.dp).padding(0.dp,10.dp,0.dp,0.dp))
             }
-
         }
         textFields2()
-
     }
 
 

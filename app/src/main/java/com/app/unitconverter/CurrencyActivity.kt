@@ -82,7 +82,7 @@ fun textFields() {
             }
 
             Column(
-                modifier=Modifier.padding(45.dp,0.dp)
+                modifier=Modifier.padding(45.dp,0.dp,45.dp,150.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
                     OutlinedButton(onClick = {if(!n1.value.isEmpty()){
@@ -184,7 +184,7 @@ fun currencyActivity(){
 
                 )
                 Image(painter = painterResource(R.drawable.currencywhite)
-                    , contentDescription =null , modifier = Modifier.height(200.dp).width(200.dp).padding(0.dp,20.dp,0.dp,0.dp))
+                    , contentDescription =null , modifier = Modifier.size(200.dp).padding(0.dp,20.dp,0.dp,0.dp))
 
 
             }

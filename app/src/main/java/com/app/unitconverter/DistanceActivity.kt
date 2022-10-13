@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,8 +14,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -66,7 +69,7 @@ fun textField() {
                 mutableStateOf("")
             }
             Column(
-                modifier=Modifier.padding(45.dp,0.dp)
+                modifier=Modifier.padding(45.dp,0.dp,45.dp,150.dp)
             ) {
                 Row(modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)) {
                     OutlinedButton(onClick = {
@@ -157,7 +160,7 @@ fun distanceActivity(){
             .fillMaxWidth()
 
         ) {
-            Column(Modifier.background(colorResource(R.color.upperStrip))) {
+            Column(Modifier.background(colorResource(R.color.upperStrip)), horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = "Distance Converter", textAlign = TextAlign.Center, color = colorResource(id = R.color.white),
                     fontFamily = FontFamily.Monospace,
                     fontSize = 20.sp, modifier = Modifier
@@ -165,10 +168,15 @@ fun distanceActivity(){
                         .fillMaxWidth()
 
                 )
+                Image(painter = painterResource(R.drawable.whitedistance), contentDescription =null
+                    , modifier = Modifier.size(200.dp))
             }
 
         }
+
+
         textField()
+
 
     }
 
